@@ -1,0 +1,23 @@
+{
+  "name": "Die Gestirne – Orakel der Kritischen Theorie",
+  "short_name": "Die Gestirne",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#dcd8cd",
+  "theme_color": "#dcd8cd",
+  "icons": [
+    {
+      "src": "die-gestirne-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "die-gestirne-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
