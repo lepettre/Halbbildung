@@ -156,7 +156,10 @@ rule();y+=4;para('»'+t+'«',26,31,'left',20,W-40);y+=14;
 x.fillRect(20,y,344,2);y+=14;
 const top=y;x.drawImage(pt,0,0,32,32,20,top,96,96);x.fillRect(20,top,96,2);x.fillRect(20,top+94,96,2);x.fillRect(20,top,2,96);x.fillRect(114,top,2,96);
 const tx=130,mw=W-tx-16;y=top;para(NAMES[k].toUpperCase(),20,24,'left',tx,mw);y+=4;para(s,17,20,'left',tx,mw);
-y=Math.max(y,top+96)+36;
+y=Math.max(y,top+96)+32;
+/* QR-Code zu lepettre.github.io/Halbbildung/ (Version 3-M, 29×29), 5 Druckpunkte je Modul ≈ 0,63 mm */
+const QR='1fcae67f,10507341,174d445d,1742735d,17586e5d,104e6641,1fd5557f,afa00,154adb12,11321149,156195f7,153eff82,1f4878cb,9ab9149,8e948db,191baeaa,7d87feb,e2c114d,165c9873,f170dca,12e311f0,1d9317,1fc5575b,104cc919,175e59f3,1742db37,175dd639,10457f22,1fd639e3'.split(',').map(h=>parseInt(h,16)),QM=5,qx=Math.round((W-29*QM)/2);
+QR.forEach((r,j)=>{for(let n=0;n<29;n++)if(r>>(28-n)&1)x.fillRect(qx+n*QM,y+j*QM,QM,QM)});y+=29*QM+32;
 const H=Math.ceil(y),o=document.createElement('canvas');o.width=W;o.height=H;const ox=o.getContext('2d');ox.drawImage(c,0,0);
 const d2=ox.getImageData(0,0,W,H),D=d2.data;for(let n=0;n<D.length;n+=4){const v=(D[n]*.3+D[n+1]*.59+D[n+2]*.11)<150?0:255;D[n]=D[n+1]=D[n+2]=v;D[n+3]=255}
 ox.putImageData(d2,0,0);const im=new Image();im.id='pimg';im.alt='Die Gestirne: '+t+' ('+NAMES[k]+', '+s+')';im.src=o.toDataURL('image/png');document.body.appendChild(im)}
