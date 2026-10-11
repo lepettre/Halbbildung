@@ -17,9 +17,10 @@
 :root{--paper:#dcd8cd;--ink:#111;--bg:#8c8a84}
 :root[data-theme="night"]{--paper:#121212;--ink:#e6e2d6;--bg:#000}
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;height:100%}
-body{background:var(--bg);color:var(--ink);font-family:'VT323','Courier New',monospace;font-size:22px;line-height:1.15;display:flex;justify-content:center;align-items:center;padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);-webkit-text-size-adjust:100%}
-.dev{width:min(100%,400px);min-height:min(100dvh,760px);background:var(--paper);padding:20px 20px 16px;display:flex;flex-direction:column;align-items:center;text-align:center;border:3px solid var(--ink);box-shadow:0 0 0 6px var(--bg),0 0 0 9px var(--ink)}
+html,body{margin:0;min-height:100%}
+body{background:var(--bg);color:var(--ink);font-family:'VT323','Courier New',monospace;font-size:22px;line-height:1.15;min-height:100vh;min-height:100dvh;display:flex;justify-content:center;align-items:flex-start;padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);-webkit-text-size-adjust:100%}
+.dev{width:min(100%,400px);min-height:min(100dvh,760px);background:var(--paper);padding:20px 20px 16px;display:flex;flex-direction:column;align-items:center;text-align:center;border:3px solid var(--ink);box-shadow:0 0 0 6px var(--bg),0 0 0 9px var(--ink);margin:auto}
+@media(min-width:441px){body{padding:16px}}
 @media(max-width:440px){.dev{border:0;box-shadow:none;min-height:100dvh}}
 canvas{image-rendering:pixelated;image-rendering:crisp-edges}
 #sky{width:min(72vw,280px);aspect-ratio:1;max-height:38dvh}
@@ -166,20 +167,20 @@ const PP=new URLSearchParams(location.search);if(PP.has('druck'))printMode(PP);e
 <section class="legal" id="impressum"><div>
 <h2>IMPRESSUM</h2>
 <p>Angaben gemäß § 5 DDG</p>
-<p>[VOR- UND NACHNAME]<br>[STRASSE UND HAUSNUMMER]<br>[PLZ ORT]</p>
-<p>Kontakt: [E-MAIL-ADRESSE]</p>
-<p><b>Verantwortlich für den Inhalt</b> (§ 18 Abs. 2 MStV): [NAME, ANSCHRIFT wie oben]</p>
+<p>J. Petter<br>20457 Hamburg</p>
+<p>Kontakt: info[at]jan-petter.de</p>
+<p><b>Verantwortlich für den Inhalt</b> (§ 18 Abs. 2 MStV): J. Petter, Anschrift wie oben</p>
 <p><b>Zitate und Urheberrecht:</b> Die Zitate sind kurze Belegstellen im Sinne von § 51 UrhG und dienen der Kulturkritik, Satire und Information. Urheber und Quelle sind jeweils angegeben (§ 63 UrhG). Die Rechte an den Originaltexten liegen bei den jeweiligen Rechteinhabern. Die Porträts sind eigene, stark vereinfachte Pixelgrafiken.</p>
 <p><b>Hinweis:</b> Die Zitate wurden mit Sorgfalt zusammengestellt. Für Hinweise auf Fehler bin ich dankbar.</p>
 <p><a href="#">← zurück</a></p>
 </div></section>
 <section class="legal" id="datenschutz"><div>
 <h2>DATENSCHUTZ</h2>
-<p><b>Verantwortlich:</b> [NAME, ANSCHRIFT, E-MAIL wie im Impressum]</p>
+<p><b>Verantwortlich:</b> J. Petter, 20457 Hamburg, info[at]jan-petter.de</p>
 <p><b>Keine Cookies, kein Tracking.</b> Diese Seite setzt keine Cookies, bindet keine Analyse-, Werbe- oder Social-Media-Dienste ein und lädt keine Inhalte von Dritten. Die Schrift nutzt die verfügbaren Monospace-Fallbacks.</p>
 <p><b>Druckansicht:</b> Die Druckansicht wird vollständig in deinem Browser erzeugt. Nummer des Zitats und Planetenstellung stehen nur in der aufgerufenen Adresse (URL) und können deshalb in den Server-Logfiles erscheinen.</p>
 <p><b>Darstellungsmodus:</b> Nur wenn du zwischen Tag- und Nachtmodus umschaltest, speichert dein Browser diese Auswahl im Local Storage (Schlüssel „theme“), damit sie beim nächsten Besuch erhalten bleibt. Der Wert wird nicht an den Server übertragen. Rechtsgrundlage: § 25 Abs. 2 Nr. 2 TDDDG, Art. 6 Abs. 1 lit. f DSGVO. Du kannst ihn jederzeit über die Browsereinstellungen löschen.</p>
-<p><b>Server-Logfiles:</b> Beim Aufruf verarbeitet der Hosting-Anbieter technisch notwendige Daten, etwa IP-Adresse, Datum und Uhrzeit, aufgerufene Datei und Browserkennung, um die Seite auszuliefern und den Betrieb zu sichern (Art. 6 Abs. 1 lit. f DSGVO). Hosting-Anbieter: [ANBIETER, ANSCHRIFT]. Speicherdauer: [LAUT ANBIETER, z. B. 7 Tage].</p>
+<p><b>Server-Logfiles:</b> Beim Aufruf verarbeitet der Hosting-Anbieter technisch notwendige Daten, etwa IP-Adresse, Datum und Uhrzeit, aufgerufene Datei und Browserkennung, um die Seite auszuliefern und den Betrieb zu sichern (Art. 6 Abs. 1 lit. f DSGVO). Hosting-Anbieter: GitHub Pages der GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. Dabei können Daten in die USA übermittelt werden; GitHub ist nach dem EU-US Data Privacy Framework zertifiziert (Art. 45 DSGVO). Art und Speicherdauer der Logfiles bestimmt GitHub, siehe <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener noreferrer">Datenschutzerklärung von GitHub</a>.</p>
 <p><b>Deine Rechte:</b> Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Beschwerde bei einer Aufsichtsbehörde (z. B. der Hamburgischen Beauftragten für Datenschutz und Informationsfreiheit).</p>
 <p><a href="#">← zurück</a></p>
 </div></section>
