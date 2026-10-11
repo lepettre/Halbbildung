@@ -49,11 +49,17 @@ button:focus-visible,a:focus-visible{outline:3px solid currentColor;outline-offs
 .tg{position:fixed;bottom:calc(2px + env(safe-area-inset-bottom,0px));right:calc(2px + env(safe-area-inset-right,0px));margin:0;padding:0;width:44px;height:44px;min-height:0;display:flex;align-items:center;justify-content:center;background:none;color:var(--ink);border:0;opacity:.45;z-index:5}
 .tg:hover,.tg:focus-visible{opacity:.9}
 .tg svg{width:14px;height:14px;shape-rendering:crispEdges;fill:currentColor}
+.pr{left:calc(2px + env(safe-area-inset-left,0px));right:auto;text-decoration:none}
+html.pm,html.pm body{background:#fff;color:#000;display:block;height:auto;min-height:100%;padding:0}
+html.pm .dev,html.pm .tg,html.pm .legal{display:none!important}
+#pimg{display:block;margin:0 auto;width:min(100vw,384px);height:auto;image-rendering:pixelated;image-rendering:crisp-edges}
+@media print{@page{size:53mm auto;margin:0}html.pm,html.pm body{margin:0;padding:0}#pimg{width:48mm;margin:0 2.5mm}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
 <button id="tg" class="tg" type="button" aria-label="Zum Nachtmodus wechseln"></button>
+<a id="pr" class="tg pr" target="_blank" rel="noopener" aria-label="Druckansicht öffnen" title="Druckansicht" style="visibility:hidden"><svg viewBox="0 0 11 11" aria-hidden="true"><rect x="2" y="0" width="7" height="3"/><rect x="0" y="4" width="11" height="4"/><rect x="2" y="8" width="1" height="3"/><rect x="8" y="8" width="1" height="3"/><rect x="2" y="10" width="7" height="1"/></svg></a>
 <main class="dev">
  <canvas id="sky" width="120" height="120" aria-label="Planetenanimation"></canvas>
  <hr>
@@ -125,13 +131,37 @@ function dith(x,y,w,h){for(let j=0;j<h;j++)for(let i=0;i<w;i++)if((i+j)%2===0)R(
 function ring(x,y,w,h){R(x,y,w,1);R(x,y+h-1,w,1);R(x,y,1,h);R(x+w-1,y,1,h)}
 function portrait(k){pc.clearRect(0,0,32,32);pc.fillStyle=css('--ink');R(5,27,22,1);R(5,27,1,5);R(26,27,1,5);dith(6,28,20,4);R(10,6,12,1);R(9,7,1,14);R(22,7,1,14);R(10,21,12,1);R(11,22,10,1);R(13,13,1,1);R(18,13,1,1);R(15,15,1,3);R(14,19,4,1);const f=k==='HA'?'A':k;if(f==='A'){R(8,9,2,6);R(22,9,2,6);R(11,5,10,1);ring(11,11,5,4);ring(17,11,5,4);R(16,12,1,1);R(15,23,2,1);R(15,24,2,3);dith(14,27,4,2)}if(f==='H'){R(8,10,2,4);R(22,10,2,4);dith(10,4,12,2);ring(11,11,5,4);ring(17,11,5,4);R(16,12,1,1)}if(f==='B'){R(8,5,16,1);dith(8,3,16,4);R(8,7,2,6);R(22,7,2,6);ring(11,12,4,4);ring(17,12,4,4);R(15,13,2,1);R(12,17,8,1);R(12,18,1,1);R(19,18,1,1)}if(f==='M'){dith(6,1,20,8);R(7,9,3,6);R(22,9,3,6);R(12,11,3,1);R(18,11,3,1)}}
 function typeIt(full){const q=$('q');q.classList.add('cur');let i=0;const iv=setInterval(()=>{i+=2;q.textContent=full.slice(0,i);if(i>=full.length){clearInterval(iv);q.classList.remove('cur')}},28)}
-function show(){const[k,t,s]=pick();$('out').classList.remove('on');$('moon').textContent=moon()+' im Zeichen '+NAMES[k].split(/[ &]+/).pop();$('au').textContent=NAMES[k];$('so').textContent=s;portrait(k);curK=k;const q=$('q');q.textContent='';q.classList.remove('cur');const full='„'+t+'“';let t0=performance.now(),dur=reduce?0:2200;if(!dur){drawSky();q.textContent=full;$('out').classList.add('on');return}let last=0;(function loop(now){const e=Math.min((now-t0)/dur,1);if(now-last>83){last=now;const v=(1-e)*(1-e)+.01;ang.forEach((a,i)=>ang[i]+=SP[i]*v*.5);drawSky()}if(e<1)requestAnimationFrame(loop);else{$('out').classList.add('on');typeIt(full)}})(t0)}
+function show(){$('pr').style.visibility='hidden';const[k,t,s]=pick();$('out').classList.remove('on');$('moon').textContent=moon()+' im Zeichen '+NAMES[k].split(/[ &]+/).pop();$('au').textContent=NAMES[k];$('so').textContent=s;portrait(k);curK=k;const q=$('q');q.textContent='';q.classList.remove('cur');const full='„'+t+'“';let t0=performance.now(),dur=reduce?0:2200;if(!dur){drawSky();q.textContent=full;$('out').classList.add('on');setPrintLink();return}let last=0;(function loop(now){const e=Math.min((now-t0)/dur,1);if(now-last>83){last=now;const v=(1-e)*(1-e)+.01;ang.forEach((a,i)=>ang[i]+=SP[i]*v*.5);drawSky()}if(e<1)requestAnimationFrame(loop);else{$('out').classList.add('on');setPrintLink();typeIt(full)}})(t0)}
 function ico(n){let s='';if(n){[[4,3,3,1],[3,4,5,3],[4,7,3,1],[5,0,1,2],[5,9,1,2],[0,5,2,1],[9,5,2,1],[1,1,1,1],[9,1,1,1],[1,9,1,1],[9,9,1,1]].forEach(r=>s+=`<rect x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}"/>`)}else{for(let y=0;y<11;y++)for(let x=0;x<11;x++){const a=(x-5)**2+(y-5)**2<=25,b=(x-7.5)**2+(y-3.5)**2<=17;if(a&&!b)s+=`<rect x="${x}" y="${y}" width="1" height="1"/>`}}return `<svg viewBox="0 0 11 11" aria-hidden="true">${s}</svg>`}
 const root=document.documentElement,tgb=$('tg'),meta=document.querySelector('meta[name="theme-color"]');
 function applyTheme(){const n=root.getAttribute('data-theme')==='night';tgb.innerHTML=ico(n);tgb.setAttribute('aria-label',n?'Zum Tagmodus wechseln':'Zum Nachtmodus wechseln');tgb.title=n?'Tagmodus':'Nachtmodus';meta.content=n?'#121212':'#dcd8cd'}
 tgb.addEventListener('click',()=>{const n=root.getAttribute('data-theme')==='night';if(n)root.removeAttribute('data-theme');else root.setAttribute('data-theme','night');try{localStorage.setItem('theme',n?'day':'night')}catch(e){}applyTheme();drawSky();portrait(curK)});
 try{if(localStorage.getItem('theme')==='night')root.setAttribute('data-theme','night')}catch(e){}
-applyTheme();$('btn').addEventListener('click',show);$('moon').textContent=moon();drawSky();show();
+applyTheme();$('btn').addEventListener('click',show);$('moon').textContent=moon();
+function setPrintLink(){const a=ang.map(v=>Math.round((((v%6.2832)+6.2832)%6.2832)*57.2958)%360).join('.'),l=$('pr');l.href='?druck='+previous+'&a='+a;l.style.visibility='visible'}
+/* Druckansicht für Phomemo T02: 203 dpi, 48 mm = 384 Punkte, nur Schwarz/Weiß */
+function printMode(P){root.classList.add('pm');root.removeAttribute('data-theme');document.title='Die Gestirne – Druck';
+let i=parseInt(P.get('druck'),10);if(!(i>=0&&i<Q.length))i=Math.floor(Math.random()*Q.length);
+const A=(P.get('a')||'').split('.').map(Number);if(A.length===ORB.length&&A.every(Number.isFinite))A.forEach((v,j)=>ang[j]=v*Math.PI/180);
+const[k,t,s]=Q[i],F='"VT323","Courier New",monospace';drawSky();portrait(k);
+const W=384,c=document.createElement('canvas');c.width=W;c.height=1800;
+const x=c.getContext('2d');x.imageSmoothingEnabled=false;x.fillStyle='#fff';x.fillRect(0,0,W,1800);x.fillStyle='#000';x.textBaseline='top';
+function wrap(txt,mw){const w=txt.split(' '),L=[];let l='';for(const a of w){const u=l?l+' '+a:a;if(x.measureText(u).width>mw&&l){L.push(l);l=a}else l=u}if(l)L.push(l);return L}
+function para(txt,px,lh,al,x0,mw){x.font='bold '+px+'px '+F;x.textAlign=al;const ax=al==='center'?x0+mw/2:x0,L=wrap(txt,mw);L.forEach((r,n)=>x.fillText(r,ax,y+n*lh));y+=L.length*lh}
+function rule(){x.fillRect(48,y,288,3);y+=14}
+let y=20;x.drawImage(sky,0,0,120,120,12,y,360,360);y+=376;
+rule();para('DIE GESTIRNE',32,38,'center',0,W);
+para(d.toLocaleDateString('de-DE',{day:'numeric',month:'short',year:'numeric'}).replace(/\./g,'').toUpperCase(),24,30,'center',0,W);y+=6;
+rule();para((moon()+' im Zeichen '+NAMES[k].split(/[ &]+/).pop()).toUpperCase(),24,30,'center',20,W-40);y+=8;
+rule();y+=4;para('„'+t+'“',26,31,'left',20,W-40);y+=14;
+x.fillRect(20,y,344,2);y+=14;
+const top=y;x.drawImage(pt,0,0,32,32,20,top,96,96);x.fillRect(20,top,96,2);x.fillRect(20,top+94,96,2);x.fillRect(20,top,2,96);x.fillRect(114,top,2,96);
+const tx=130,mw=W-tx-16;y=top;para(NAMES[k].toUpperCase(),20,24,'left',tx,mw);y+=4;para(s,17,20,'left',tx,mw);
+y=Math.max(y,top+96)+36;
+const H=Math.ceil(y),o=document.createElement('canvas');o.width=W;o.height=H;const ox=o.getContext('2d');ox.drawImage(c,0,0);
+const d2=ox.getImageData(0,0,W,H),D=d2.data;for(let n=0;n<D.length;n+=4){const v=(D[n]*.3+D[n+1]*.59+D[n+2]*.11)<150?0:255;D[n]=D[n+1]=D[n+2]=v;D[n+3]=255}
+ox.putImageData(d2,0,0);const im=new Image();im.id='pimg';im.alt='Die Gestirne: '+t+' ('+NAMES[k]+', '+s+')';im.src=o.toDataURL('image/png');document.body.appendChild(im)}
+const PP=new URLSearchParams(location.search);if(PP.has('druck'))printMode(PP);else{drawSky();show()}
 </script>
 <section class="legal" id="impressum"><div>
 <h2>IMPRESSUM</h2>
@@ -147,6 +177,7 @@ applyTheme();$('btn').addEventListener('click',show);$('moon').textContent=moon(
 <h2>DATENSCHUTZ</h2>
 <p><b>Verantwortlich:</b> [NAME, ANSCHRIFT, E-MAIL wie im Impressum]</p>
 <p><b>Keine Cookies, kein Tracking.</b> Diese Seite setzt keine Cookies, bindet keine Analyse-, Werbe- oder Social-Media-Dienste ein und lädt keine Inhalte von Dritten. Die Schrift nutzt die verfügbaren Monospace-Fallbacks.</p>
+<p><b>Druckansicht:</b> Die Druckansicht wird vollständig in deinem Browser erzeugt. Nummer des Zitats und Planetenstellung stehen nur in der aufgerufenen Adresse (URL) und können deshalb in den Server-Logfiles erscheinen.</p>
 <p><b>Darstellungsmodus:</b> Nur wenn du zwischen Tag- und Nachtmodus umschaltest, speichert dein Browser diese Auswahl im Local Storage (Schlüssel „theme“), damit sie beim nächsten Besuch erhalten bleibt. Der Wert wird nicht an den Server übertragen. Rechtsgrundlage: § 25 Abs. 2 Nr. 2 TDDDG, Art. 6 Abs. 1 lit. f DSGVO. Du kannst ihn jederzeit über die Browsereinstellungen löschen.</p>
 <p><b>Server-Logfiles:</b> Beim Aufruf verarbeitet der Hosting-Anbieter technisch notwendige Daten, etwa IP-Adresse, Datum und Uhrzeit, aufgerufene Datei und Browserkennung, um die Seite auszuliefern und den Betrieb zu sichern (Art. 6 Abs. 1 lit. f DSGVO). Hosting-Anbieter: [ANBIETER, ANSCHRIFT]. Speicherdauer: [LAUT ANBIETER, z. B. 7 Tage].</p>
 <p><b>Deine Rechte:</b> Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Beschwerde bei einer Aufsichtsbehörde (z. B. der Hamburgischen Beauftragten für Datenschutz und Informationsfreiheit).</p>
