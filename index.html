@@ -37,7 +37,6 @@ blockquote{margin:6px 0 10px;font-size:1.1em;line-height:1.2;text-align:left;hyp
 button{font:inherit;color:var(--paper);background:var(--ink);border:0;padding:6px 14px;margin-top:12px;letter-spacing:.1em;cursor:pointer;min-height:44px}
 button:active{transform:translate(2px,2px)}
 button:focus-visible,a:focus-visible{outline:3px solid currentColor;outline-offset:3px}
-.fine{font-size:.72em;opacity:.7;margin-top:8px}
 .cur::after{content:"█";animation:b 1s steps(2) infinite}
 @keyframes b{50%{opacity:0}}
 .foot{margin-top:10px;font-size:.78em}
@@ -74,7 +73,6 @@ html.pm .dev,html.pm .tg,html.pm .legal{display:none!important}
   <div class="who"><canvas id="pt" width="32" height="32" aria-hidden="true"></canvas>
    <div><div class="n" id="au"></div><div class="src" id="so"></div></div></div>
   <button id="btn" type="button">NEUES ORAKEL ▸</button>
-  <div class="fine">Die Sterne lügen.</div>
   <div class="foot"><a href="#impressum">Impressum</a>·<a href="#datenschutz">Datenschutz</a></div>
  </div>
  <noscript>Dieses Orakel braucht JavaScript.</noscript>
@@ -102,14 +100,14 @@ const Q=[
 ["H","Wer aber vom Kapitalismus nicht reden will, sollte auch vom Faschismus schweigen.","Die Juden und Europa (1939)"],
 ["H","Was wir Sinn nennen, wird verschwinden.","Titel des SPIEGEL-Gesprächs mit Horkheimer, 1970"],
 ["B","Es ist niemals ein Dokument der Kultur, ohne zugleich ein solches der Barbarei zu sein.",UG+"These VII"],
-["B","Die Tradition der Unterdrückten belehrt uns darüber, daß der ‚Ausnahmezustand‘, in dem wir leben, die Regel ist.",UG+"These VIII"],
+["B","Die Tradition der Unterdrückten belehrt uns darüber, daß der ›Ausnahmezustand‹, in dem wir leben, die Regel ist.",UG+"These VIII"],
 ["B","Dieser Sturm ist das, was wir den Fortschritt nennen.",UG+"These IX (Engel der Geschichte)"],
-["B","Daß es ‚so weiter‘ geht, ist die Katastrophe.","Zentralpark (1938/39)"],
+["B","Daß es ›so weiter‹ geht, ist die Katastrophe.","Zentralpark (1938/39)"],
 ["B","Was im Zeitalter der technischen Reproduzierbarkeit des Kunstwerks verkümmert, das ist seine Aura.","Das Kunstwerk im Zeitalter seiner technischen Reproduzierbarkeit"],
 ["B","Die Menschheit lässt ihre eigene Vernichtung als ästhetischen Genuß ersten Ranges erleben.","Kunstwerk-Aufsatz, Schluss (gekürzt)"],
 ["B","Im Kapitalismus ist eine Religion zu erblicken.","Kapitalismus als Religion (1921, Fragment)"],
 ["B","Ich habe nichts zu sagen. Nur zu zeigen.","Das Passagen-Werk, N 1a,8"],
-["B","Vielleicht sind die Revolutionen der Griff des in diesem Zug reisenden Menschengeschlechts nach der Notbremse.","Paralipomena zu ‚Über den Begriff der Geschichte‘"],
+["B","Vielleicht sind die Revolutionen der Griff des in diesem Zug reisenden Menschengeschlechts nach der Notbremse.","Paralipomena zu »Über den Begriff der Geschichte«"],
 ["B","Langeweile ist der Traumvogel, der das Ei der Erfahrung ausbrütet.","Der Erzähler (1936)"],
 ["B","Nur um der Hoffnungslosen willen ist uns die Hoffnung gegeben.","Goethes Wahlverwandtschaften (1924/25), Schluss"],
 ["M","Eine komfortable, reibungslose, vernünftige, demokratische Unfreiheit herrscht in der fortgeschrittenen Industriegesellschaft, ein Zeichen technischen Fortschritts.",ED+"Einleitung"],
@@ -132,7 +130,7 @@ function dith(x,y,w,h){for(let j=0;j<h;j++)for(let i=0;i<w;i++)if((i+j)%2===0)R(
 function ring(x,y,w,h){R(x,y,w,1);R(x,y+h-1,w,1);R(x,y,1,h);R(x+w-1,y,1,h)}
 function portrait(k){pc.clearRect(0,0,32,32);pc.fillStyle=css('--ink');R(5,27,22,1);R(5,27,1,5);R(26,27,1,5);dith(6,28,20,4);R(10,6,12,1);R(9,7,1,14);R(22,7,1,14);R(10,21,12,1);R(11,22,10,1);R(13,13,1,1);R(18,13,1,1);R(15,15,1,3);R(14,19,4,1);const f=k==='HA'?'A':k;if(f==='A'){R(8,9,2,6);R(22,9,2,6);R(11,5,10,1);ring(11,11,5,4);ring(17,11,5,4);R(16,12,1,1);R(15,23,2,1);R(15,24,2,3);dith(14,27,4,2)}if(f==='H'){R(8,10,2,4);R(22,10,2,4);dith(10,4,12,2);ring(11,11,5,4);ring(17,11,5,4);R(16,12,1,1)}if(f==='B'){R(8,5,16,1);dith(8,3,16,4);R(8,7,2,6);R(22,7,2,6);ring(11,12,4,4);ring(17,12,4,4);R(15,13,2,1);R(12,17,8,1);R(12,18,1,1);R(19,18,1,1)}if(f==='M'){dith(6,1,20,8);R(7,9,3,6);R(22,9,3,6);R(12,11,3,1);R(18,11,3,1)}}
 function typeIt(full){const q=$('q');q.classList.add('cur');let i=0;const iv=setInterval(()=>{i+=2;q.textContent=full.slice(0,i);if(i>=full.length){clearInterval(iv);q.classList.remove('cur')}},28)}
-function show(){$('pr').style.visibility='hidden';const[k,t,s]=pick();$('out').classList.remove('on');$('moon').textContent=moon()+' im Zeichen '+NAMES[k].split(/[ &]+/).pop();$('au').textContent=NAMES[k];$('so').textContent=s;portrait(k);curK=k;const q=$('q');q.textContent='';q.classList.remove('cur');const full='„'+t+'“';let t0=performance.now(),dur=reduce?0:2200;if(!dur){drawSky();q.textContent=full;$('out').classList.add('on');setPrintLink();return}let last=0;(function loop(now){const e=Math.min((now-t0)/dur,1);if(now-last>83){last=now;const v=(1-e)*(1-e)+.01;ang.forEach((a,i)=>ang[i]+=SP[i]*v*.5);drawSky()}if(e<1)requestAnimationFrame(loop);else{$('out').classList.add('on');setPrintLink();typeIt(full)}})(t0)}
+function show(){$('pr').style.visibility='hidden';const[k,t,s]=pick();$('out').classList.remove('on');$('moon').textContent=moon()+' im Zeichen '+NAMES[k].split(/[ &]+/).pop();$('au').textContent=NAMES[k];$('so').textContent=s;portrait(k);curK=k;const q=$('q');q.textContent='';q.classList.remove('cur');const full='»'+t+'«';let t0=performance.now(),dur=reduce?0:2200;if(!dur){drawSky();q.textContent=full;$('out').classList.add('on');setPrintLink();return}let last=0;(function loop(now){const e=Math.min((now-t0)/dur,1);if(now-last>83){last=now;const v=(1-e)*(1-e)+.01;ang.forEach((a,i)=>ang[i]+=SP[i]*v*.5);drawSky()}if(e<1)requestAnimationFrame(loop);else{$('out').classList.add('on');setPrintLink();typeIt(full)}})(t0)}
 function ico(n){let s='';if(n){[[4,3,3,1],[3,4,5,3],[4,7,3,1],[5,0,1,2],[5,9,1,2],[0,5,2,1],[9,5,2,1],[1,1,1,1],[9,1,1,1],[1,9,1,1],[9,9,1,1]].forEach(r=>s+=`<rect x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}"/>`)}else{for(let y=0;y<11;y++)for(let x=0;x<11;x++){const a=(x-5)**2+(y-5)**2<=25,b=(x-7.5)**2+(y-3.5)**2<=17;if(a&&!b)s+=`<rect x="${x}" y="${y}" width="1" height="1"/>`}}return `<svg viewBox="0 0 11 11" aria-hidden="true">${s}</svg>`}
 const root=document.documentElement,tgb=$('tg'),meta=document.querySelector('meta[name="theme-color"]');
 function applyTheme(){const n=root.getAttribute('data-theme')==='night';tgb.innerHTML=ico(n);tgb.setAttribute('aria-label',n?'Zum Tagmodus wechseln':'Zum Nachtmodus wechseln');tgb.title=n?'Tagmodus':'Nachtmodus';meta.content=n?'#121212':'#dcd8cd'}
@@ -154,7 +152,7 @@ let y=20;x.drawImage(sky,0,0,120,120,12,y,360,360);y+=376;
 rule();para('DIE GESTIRNE',32,38,'center',0,W);
 para(d.toLocaleDateString('de-DE',{day:'numeric',month:'short',year:'numeric'}).replace(/\./g,'').toUpperCase(),24,30,'center',0,W);y+=6;
 rule();para((moon()+' im Zeichen '+NAMES[k].split(/[ &]+/).pop()).toUpperCase(),24,30,'center',20,W-40);y+=8;
-rule();y+=4;para('„'+t+'“',26,31,'left',20,W-40);y+=14;
+rule();y+=4;para('»'+t+'«',26,31,'left',20,W-40);y+=14;
 x.fillRect(20,y,344,2);y+=14;
 const top=y;x.drawImage(pt,0,0,32,32,20,top,96,96);x.fillRect(20,top,96,2);x.fillRect(20,top+94,96,2);x.fillRect(20,top,2,96);x.fillRect(114,top,2,96);
 const tx=130,mw=W-tx-16;y=top;para(NAMES[k].toUpperCase(),20,24,'left',tx,mw);y+=4;para(s,17,20,'left',tx,mw);
