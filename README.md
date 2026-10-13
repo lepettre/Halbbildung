@@ -4,7 +4,7 @@
 
 Ein Horoskop, das keines ist: Statt Sternzeichen-Prognosen liefert *Die Gestirne* bei jedem Aufruf ein Zitat von Theodor W. Adorno, Max Horkheimer, Walter Benjamin oder Herbert Marcuse – mit Quellenangabe, Pixel-Porträt und einer kreisenden 1-Bit-Planetenanimation. Der Mond steht dann zum Beispiel „im Zeichen Adorno“.
 
-Der Witz liegt im Widerspruch: Adorno hat Astrologie und Okkultismus in den *Thesen gegen den Okkultismus* (Minima Moralia, Aph. 151) und in *The Stars Down to Earth* (1957) als Symptom gesellschaftlicher Regression beschrieben. Der Repository-Name verweist auf seine *Theorie der Halbbildung* (1959).
+Der Witz liegt im Widerspruch: Adorno hat Astrologie und Okkultismus in den *Thesen gegen den Okkultismus* (Minima Moralia, Aph. 151) und in *The Stars Down to Earth* (1957) als Symptom gesellschaftlicher Regression beschrieben. Der Repository-Name verweist auf seine *Theorie der Halbbildung* (1959). Der Begriff trifft auch auf das Projekt selbst zu: Fast alles – Code, Grafiken, Zitatauswahl und Texte – ist mithilfe von KI entstanden. Bildung aus zweiter Hand, angeeignet ohne eigene Erfahrung der Sache – genau das, was Adorno mit Halbbildung meinte.
 
 ## Status
 
